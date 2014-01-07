@@ -8,7 +8,7 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
 
     go get github.com/bliof/gobilling
 
-## Lencense
+## License
 
 The MIT License (MIT)
 
