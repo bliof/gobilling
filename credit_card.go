@@ -5,6 +5,6 @@ type CreditCard struct{
 	Year int
 }
 
-func (cc *CreditCard) Validate() (valid bool, err error) {
+func (cc *CreditCard) Validate() (err error) {
 	return
 }

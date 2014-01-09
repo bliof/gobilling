@@ -23,10 +23,10 @@ func ExampleCreditCard_create() {
 	}
 
 	// When validating the credit card, the type will be automaticly filled
-	ok, _ := creditCard.Validate()
+	err := creditCard.Validate()
 
-	fmt.Printf("Is the card valid? %t", ok)
-	fmt.Printf("creditCard.Type = %s", creditCard.Type)
+	fmt.Printf("Is the card valid? %t\n", err == nil)
+	fmt.Printf("creditCard.Type = %s\n", creditCard.Type)
 	// Output:
 	// Is the card valid? true
 	// creditCard.Type = visa
