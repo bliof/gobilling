@@ -8,8 +8,8 @@ import (
 	"github.com/bliof/gobilling/gateway"
 )
 
-// Here we create a credit card object and validate.
-// Notice that when you validate the card the Type will be
+// Here we create a credit card object and validate it.
+// Notice that when you validate the card the Brand will be
 // automaticly added to the struct if it was not provided in
 // advance.
 func ExampleCreditCard_create() {
@@ -23,14 +23,14 @@ func ExampleCreditCard_create() {
 		VerificationValue: "000",
 	}
 
-	// When validating the credit card, the type will be automaticly filled
+	// When validating the credit card, the Brand will be automaticly filled
 	err := creditCard.Validate()
 
 	fmt.Printf("Is the card valid? %t\n", err == nil)
-	fmt.Printf("creditCard.Type = %s\n", creditCard.Type)
+	fmt.Printf("creditCard.Brand = %s\n", creditCard.Brand)
 	// Output:
 	// Is the card valid? true
-	// creditCard.Type = visa
+	// creditCard.Brand = visa
 }
 
 func ExampleGateway_interaction() {

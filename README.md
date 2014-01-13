@@ -28,7 +28,7 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
         VerificationValue: "000",
     }
 
-    // When validating the credit card, the type will be automaticly filled
+    // When validating the credit card, the Brand will be automaticly filled
     err := creditCard.Validate()
 
     if err == nil {

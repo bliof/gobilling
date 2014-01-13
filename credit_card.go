@@ -1,8 +1,8 @@
 package gobilling
 
 type CreditCard struct {
-	FirstName, LastName, Number, Type, Month, VerificationValue string
-	Year                                                        int
+	FirstName, LastName, Number, Brand, Month, VerificationValue string
+	Year                                                         int
 }
 
 func (cc *CreditCard) Validate() (err error) {
