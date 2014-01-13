@@ -19,7 +19,7 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
 
             amount := 20.0
 
-	    // The verificationValue is also known as CVV2, CVC2, or CID
+            // The verificationValue is also known as CVV2, CVC2, or CID
             creditCard := gobilling.CreditCard{
                     FirstName:         "Rose",
                     LastName:          "Tyler",
@@ -29,7 +29,7 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
                     VerificationValue: "000",
             }
 
-	    // When validating the credit card, the type will be automaticly filled
+            // When validating the credit card, the type will be automaticly filled
             err := creditCard.Validate()
 
             if err == nil {
