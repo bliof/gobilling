@@ -8,6 +8,14 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
 
     go get github.com/bliof/gobilling
 
+## TODO
+
+Design the structure of the lib.
+
+Provide a working gateway plugin (most likely with PayPal Payments Pro).
+
+Provide a working integration (when redirecting to perform the payment process on another site) plugin.
+
 ## License
 
 The MIT License (MIT)
