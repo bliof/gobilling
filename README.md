@@ -10,39 +10,37 @@ Inspired by [active_merchant](https://github.com/Shopify/active_merchant)
 
 ## How should work
 
-    func ExampleGateway_interaction() {
-            gateway := gateway.PayPal{
-                    User:      "TestMerchant",
-                    Password:  "password",
-                    Signature: "ashjdfasdkf",
-            }
-
-            amount := 20.0
-
-            // The verificationValue is also known as CVV2, CVC2, or CID
-            creditCard := gobilling.CreditCard{
-                    FirstName:         "Rose",
-                    LastName:          "Tyler",
-                    Number:            "4222222222222",
-                    Month:             "9",
-                    Year:              time.Now().Year() + 1,
-                    VerificationValue: "000",
-            }
-
-            // When validating the credit card, the type will be automaticly filled
-            err := creditCard.Validate()
-
-            if err == nil {
-                    response := gateway.Purchase(amount, creditCard)
-
-                    if response.IsSuccessful() {
-                            fmt.Printf("Charged %.2f to the credit card %s", amount, creditCard.DisplayNumber())
-                    }
-            }
-
-            // Output:
-            // Charged 20.00 to the credit card XXXX-XXXX-XXXX-2222
+    gateway := gateway.PayPal{
+        User:      "TestMerchant",
+        Password:  "password",
+        Signature: "ashjdfasdkf",
     }
+
+    amount := 20.0
+
+    // The verificationValue is also known as CVV2, CVC2, or CID
+    creditCard := gobilling.CreditCard{
+        FirstName:         "Rose",
+        LastName:          "Tyler",
+        Number:            "4222222222222",
+        Month:             "9",
+        Year:              time.Now().Year() + 1,
+        VerificationValue: "000",
+    }
+
+    // When validating the credit card, the type will be automaticly filled
+    err := creditCard.Validate()
+
+    if err == nil {
+        response := gateway.Purchase(amount, creditCard)
+
+        if response.IsSuccessful() {
+            fmt.Printf("Charged %.2f to the credit card %s", amount, creditCard.DisplayNumber())
+        }
+    }
+
+    // Output:
+    // Charged 20.00 to the credit card XXXX-XXXX-XXXX-2222
 
 ## TODO
 
