@@ -14,11 +14,11 @@ import (
 func ExampleCreditCard_create() {
 	// The verificationValue is also known as CVV2, CVC2, or CID
 	creditCard := gobilling.CreditCard{
-		FirstName: "Rose",
-		LastName: "Tyler",
-		Number: "4242424242424242",
-		Month: "9",
-		Year: time.Now().Year() + 1,
+		FirstName:         "Rose",
+		LastName:          "Tyler",
+		Number:            "4242424242424242",
+		Month:             "9",
+		Year:              time.Now().Year() + 1,
 		VerificationValue: "000",
 	}
 
