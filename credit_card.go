@@ -8,6 +8,7 @@ type CreditCard struct {
 }
 
 func (cc *CreditCard) Validate() (err error) {
+	cc.Brand = "visa"
 	return
 }
 
