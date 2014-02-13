@@ -3,6 +3,7 @@ package gobilling
 import (
 	"testing"
 	"time"
+	"github.com/stretchr/testify/assert"
 )
 
 func creditCard() CreditCard {
@@ -19,7 +20,5 @@ func creditCard() CreditCard {
 func TestDisplayNumber(t *testing.T) {
 	cc := creditCard()
 
-	if cc.DisplayNumber() != "XXXX-XXXX-XXXX-2222" {
-		t.Error(cc.DisplayNumber())
-	}
+	assert.Equal(t, "XXXX-XXXX-XXXX-2222", cc.DisplayNumber())
 }
