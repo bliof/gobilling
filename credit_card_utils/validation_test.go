@@ -2,6 +2,8 @@ package credit_card_utils
 
 import (
 	"testing"
+	"time"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -12,4 +14,11 @@ func TestIsValidMonth(t *testing.T) {
 
 	assert.False(t, IsValidMonth(0), "0 is incorrect month number")
 	assert.False(t, IsValidMonth(0), "13 is incorrect month number")
+}
+
+func TestIsValidExpiryYear(t *testing.T) {
+	assert.True(t, IsValidExpiryYear(time.Now().Year()))
+	assert.True(t, IsValidExpiryYear(time.Now().Year()+10))
+
+	assert.False(t, IsValidExpiryYear(time.Now().Year()-1))
 }
