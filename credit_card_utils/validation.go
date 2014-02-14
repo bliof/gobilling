@@ -2,6 +2,7 @@ package credit_card_utils
 
 import (
 	"fmt"
+	"regexp"
 	"time"
 )
 
@@ -82,4 +83,10 @@ func CheckForRequiredFields(rcc ReadOnlyCreditCard) error {
 	}
 
 	return e.ToError()
+}
+
+func SetupNumber(number string) string {
+	r := regexp.MustCompile(`[^\d]+`)
+
+	return r.ReplaceAllString(number, "")
 }

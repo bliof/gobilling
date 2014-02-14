@@ -22,3 +22,8 @@ func TestIsValidExpiryYear(t *testing.T) {
 
 	assert.False(t, IsValidExpiryYear(time.Now().Year()-1))
 }
+
+func TestSetupNumber(t *testing.T) {
+	assert.Equal(t, "1234567812345678", SetupNumber("1234-5678-1234-5678"))
+	assert.Equal(t, "1234567812345678", SetupNumber("    1234   5678  1234 5678    "))
+}
