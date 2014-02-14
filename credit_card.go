@@ -3,8 +3,8 @@ package gobilling
 import ccutils "github.com/bliof/gobilling/credit_card_utils"
 
 type CreditCard struct {
-	FirstName, LastName, Number, Brand, Month, VerificationValue string
-	Year                                                         int
+	FirstName, LastName, Number, Brand, VerificationValue string
+	Month, Year                                           int
 }
 
 func (cc *CreditCard) Validate() (err error) {

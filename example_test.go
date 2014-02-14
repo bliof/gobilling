@@ -18,7 +18,7 @@ func ExampleCreditCard_create() {
 		FirstName:         "Rose",
 		LastName:          "Tyler",
 		Number:            "4242424242424242",
-		Month:             "9",
+		Month:             9,
 		Year:              time.Now().Year() + 1,
 		VerificationValue: "000",
 	}
@@ -46,7 +46,7 @@ func ExampleGateway_interaction() {
 		FirstName:         "Rose",
 		LastName:          "Tyler",
 		Number:            "4222222222222",
-		Month:             "9",
+		Month:             9,
 		Year:              time.Now().Year() + 1,
 		VerificationValue: "000",
 	}
