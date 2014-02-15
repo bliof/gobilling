@@ -7,6 +7,7 @@ import (
 
 const (
 	REQUIRED = "required"
+	INVALID  = "invalid"
 )
 
 type FieldError struct {
@@ -55,31 +56,53 @@ func IsValidExpiryYear(year int) bool {
 }
 
 func CheckForRequiredFields(rcc ReadOnlyCreditCard) error {
-	e := new(FieldsError)
+	err := new(FieldsError)
 
 	if rcc.GetFirstName() == "" {
-		e.Add("FirstName", REQUIRED)
+		err.Add("FirstName", REQUIRED)
 	}
 
 	if rcc.GetLastName() == "" {
-		e.Add("LastName", REQUIRED)
+		err.Add("LastName", REQUIRED)
 	}
 
 	if rcc.GetNumber() == "" {
-		e.Add("Number", REQUIRED)
+		err.Add("Number", REQUIRED)
 	}
 
 	if rcc.GetBrand() == "" {
-		e.Add("Brand", REQUIRED)
+		err.Add("Brand", REQUIRED)
 	}
 
 	if rcc.GetMonth() == 0 {
-		e.Add("Month", REQUIRED)
+		err.Add("Month", REQUIRED)
 	}
 
 	if rcc.GetYear() == 0 {
-		e.Add("Year", REQUIRED)
+		err.Add("Year", REQUIRED)
 	}
 
-	return e.ToError()
+	return err.ToError()
+}
+
+func ValidateCreditCard(cc CreditCard) error {
+	SetupCreditCard(cc)
+
+	required := CheckForRequiredFields(cc)
+
+	if required != nil {
+		return required
+	}
+
+	err := new(FieldsError)
+
+	if !IsValidMonth(cc.GetMonth()) {
+		err.Add("Month", INVALID)
+	}
+
+	if !IsValidExpiryYear(cc.GetYear()) {
+		err.Add("Year", INVALID)
+	}
+
+	return err.ToError()
 }

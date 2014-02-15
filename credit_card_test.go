@@ -23,3 +23,11 @@ func TestDisplayNumber(t *testing.T) {
 
 	assert.Equal(t, "XXXX-XXXX-XXXX-2222", cc.DisplayNumber())
 }
+
+func TestValidate(t *testing.T) {
+	cc := creditCard()
+	err := cc.Validate()
+
+	assert.Nil(t, err)
+	assert.Equal(t, "visa", cc.Brand)
+}

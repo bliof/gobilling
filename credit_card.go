@@ -28,9 +28,8 @@ func (cc *CreditCard) SetMonth(month int) { cc.Month = month }
 func (cc *CreditCard) GetYear() int     { return cc.Year }
 func (cc *CreditCard) SetYear(year int) { cc.Year = year }
 
-func (cc *CreditCard) Validate() (err error) {
-	cc.Brand = "visa"
-	return
+func (cc *CreditCard) Validate() error {
+	return ccutils.ValidateCreditCard(cc)
 }
 
 func (cc *CreditCard) DisplayNumber() string {
