@@ -31,3 +31,12 @@ func TestValidate(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "visa", cc.Brand)
 }
+
+func TestValidateSwitchCreditCard(t *testing.T) {
+	cc := creditCard()
+	cc.Number = "6759000000000000000"
+	err := cc.Validate()
+
+	assert.NotNil(t, err)
+	assert.Equal(t, "switch", cc.Brand)
+}

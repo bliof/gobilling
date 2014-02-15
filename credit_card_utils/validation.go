@@ -118,21 +118,37 @@ func ValidateCreditCard(cc ReadOnlyCreditCard) error {
 	}
 
 	if cc.GetBrand() == "switch" || cc.GetBrand() == "solo" {
-		if !(IsValidMonth(cc.GetStartMonth()) && IsValidStartYear(cc.GetStartYear()) || IsValidIssueNumber(cc.GetIssueNumber())) {
-			if cc.GetIssueNumber() == "" {
-				err.Add("IssueNumber", REQUIRED)
+		switchFieldsError := ValidateSwitchCreditCardFields(cc)
 
-				if !IsValidMonth(cc.GetStartMonth()) {
-					err.Add("StartMonth", INVALID)
-				}
+		if switchFieldsError != nil {
+			var e interface{}
 
-				if !IsValidStartYear(cc.GetStartYear()) {
-					err.Add("StartYear", INVALID)
-				}
-			} else {
-				if !IsValidIssueNumber(cc.GetIssueNumber()) {
-					err.Add("IssueNumber", INVALID)
-				}
+			e = switchFieldsError
+
+			err.FieldErrors = append(err.FieldErrors, e.(*FieldsError).FieldErrors...)
+		}
+	}
+
+	return err.ToError()
+}
+
+func ValidateSwitchCreditCardFields(cc ReadOnlyCreditCard) error {
+	err := new(FieldsError)
+
+	if !(IsValidMonth(cc.GetStartMonth()) && IsValidStartYear(cc.GetStartYear()) || IsValidIssueNumber(cc.GetIssueNumber())) {
+		if cc.GetIssueNumber() == "" {
+			err.Add("IssueNumber", REQUIRED)
+
+			if !IsValidMonth(cc.GetStartMonth()) {
+				err.Add("StartMonth", INVALID)
+			}
+
+			if !IsValidStartYear(cc.GetStartYear()) {
+				err.Add("StartYear", INVALID)
+			}
+		} else {
+			if !IsValidIssueNumber(cc.GetIssueNumber()) {
+				err.Add("IssueNumber", INVALID)
 			}
 		}
 	}
