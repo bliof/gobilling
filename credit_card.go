@@ -48,6 +48,8 @@ func (cc *CreditCard) SetRequiresVerificationValue(required bool) {
 }
 
 func (cc *CreditCard) Validate() error {
+	ccutils.SetupCreditCard(cc)
+
 	return ccutils.ValidateCreditCard(cc)
 }
 

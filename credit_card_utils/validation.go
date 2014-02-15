@@ -66,43 +66,41 @@ func IsValidIssueNumber(number string) bool {
 	return re.MatchString(number)
 }
 
-func CheckForRequiredFields(rcc ReadOnlyCreditCard) error {
+func CheckForRequiredFields(cc ReadOnlyCreditCard) error {
 	err := new(FieldsError)
 
-	if rcc.GetFirstName() == "" {
+	if cc.GetFirstName() == "" {
 		err.Add("FirstName", REQUIRED)
 	}
 
-	if rcc.GetLastName() == "" {
+	if cc.GetLastName() == "" {
 		err.Add("LastName", REQUIRED)
 	}
 
-	if rcc.GetBrand() == "" {
+	if cc.GetBrand() == "" {
 		err.Add("Brand", REQUIRED)
 	}
 
-	if rcc.GetNumber() == "" {
+	if cc.GetNumber() == "" {
 		err.Add("Number", REQUIRED)
 	}
 
-	if rcc.RequiresVerificationValue() && rcc.GetVerificationValue() == "" {
+	if cc.RequiresVerificationValue() && cc.GetVerificationValue() == "" {
 		err.Add("VerificationValue", REQUIRED)
 	}
 
-	if rcc.GetMonth() == 0 {
+	if cc.GetMonth() == 0 {
 		err.Add("Month", REQUIRED)
 	}
 
-	if rcc.GetYear() == 0 {
+	if cc.GetYear() == 0 {
 		err.Add("Year", REQUIRED)
 	}
 
 	return err.ToError()
 }
 
-func ValidateCreditCard(cc CreditCard) error {
-	SetupCreditCard(cc)
-
+func ValidateCreditCard(cc ReadOnlyCreditCard) error {
 	required := CheckForRequiredFields(cc)
 
 	if required != nil {
