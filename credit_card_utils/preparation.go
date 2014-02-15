@@ -1,11 +1,24 @@
 package credit_card_utils
 
-import "regexp"
+import (
+	"regexp"
+	"strings"
+)
 
 func SetupNumber(number string) string {
 	r := regexp.MustCompile(`[^\d]+`)
 
 	return r.ReplaceAllString(number, "")
+}
+
+func SetupCreditCard(cc CreditCard) {
+	cc.SetNumber(SetupNumber(cc.GetNumber()))
+
+	if cc.GetBrand() != "" {
+		cc.SetBrand(strings.ToLower(cc.GetBrand()))
+	} else {
+		cc.SetBrand(DetectBrand(cc.GetNumber()))
+	}
 }
 
 func DetectBrand(number string) string {
