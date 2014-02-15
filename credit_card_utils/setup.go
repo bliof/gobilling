@@ -8,6 +8,43 @@ func SetupNumber(number string) string {
 	return r.ReplaceAllString(number, "")
 }
 
+func DetectBrand(number string) string {
+	detectors := BrandDetectors()
+
+	for _, brand := range BrandsByDetectorPriority() {
+		if detectors[brand](number) {
+			return brand
+		}
+	}
+
+	return ""
+}
+
+func BrandsByDetectorPriority() []string {
+	return []string{
+		"visa", "master", "discover", "american_express", "diners_club",
+		"jcb", "switch", "solo", "dankort", "forbrugsforeningen",
+		"laser", "maestro",
+	}
+}
+
+func BrandDetectors() map[string]func(string) bool {
+	return map[string]func(string) bool{
+		"visa":               DetectVisa,
+		"master":             DetectMasterCard,
+		"discover":           DetectDiscover,
+		"american_express":   DetectAmericanExpress,
+		"diners_club":        DetectDinersClub,
+		"jcb":                DetectJCB,
+		"switch":             DetectSwitch,
+		"solo":               DetectSolo,
+		"dankort":            DetectDankort,
+		"maestro":            DetectMaestro,
+		"forbrugsforeningen": DetectForbrugsforeningen,
+		"laser":              DetectLaser,
+	}
+}
+
 func DetectVisa(number string) bool {
 	re := regexp.MustCompile(`^4\d{12}(\d{3})?$`)
 
@@ -82,41 +119,4 @@ func DetectLaser(number string) bool {
 	re := regexp.MustCompile(`^(6304|6706|6709|6771)\d{8}(\d{4}|\d{6,7})?$`)
 
 	return re.MatchString(number)
-}
-
-func BrandDetectors() map[string]func(string) bool {
-	return map[string]func(string) bool{
-		"visa":               DetectVisa,
-		"master":             DetectMasterCard,
-		"discover":           DetectDiscover,
-		"american_express":   DetectAmericanExpress,
-		"diners_club":        DetectDinersClub,
-		"jcb":                DetectJCB,
-		"switch":             DetectSwitch,
-		"solo":               DetectSolo,
-		"dankort":            DetectDankort,
-		"maestro":            DetectMaestro,
-		"forbrugsforeningen": DetectForbrugsforeningen,
-		"laser":              DetectLaser,
-	}
-}
-
-func BrandsByDetectorPriority() []string {
-	return []string{
-		"visa", "master", "discover", "american_express", "diners_club",
-		"jcb", "switch", "solo", "dankort", "forbrugsforeningen",
-		"laser", "maestro",
-	}
-}
-
-func DetectBrand(number string) string {
-	detectors := BrandDetectors()
-
-	for _, brand := range BrandsByDetectorPriority() {
-		if detectors[brand](number) {
-			return brand
-		}
-	}
-
-	return ""
 }
