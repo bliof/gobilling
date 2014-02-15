@@ -6,6 +6,9 @@ type CreditCard struct {
 	FirstName, LastName, Number, Brand, VerificationValue string
 	Month, Year                                           int
 
+	StartMonth, StartYear int
+	IssueNumber           string
+
 	OptionalVerficationValue bool
 }
 
@@ -29,6 +32,15 @@ func (cc *CreditCard) SetMonth(month int) { cc.Month = month }
 
 func (cc *CreditCard) GetYear() int     { return cc.Year }
 func (cc *CreditCard) SetYear(year int) { cc.Year = year }
+
+func (cc *CreditCard) GetStartMonth() int      { return cc.StartMonth }
+func (cc *CreditCard) SetStartMonth(month int) { cc.StartMonth = month }
+
+func (cc *CreditCard) GetStartYear() int     { return cc.StartYear }
+func (cc *CreditCard) SetStartYear(year int) { cc.StartYear = year }
+
+func (cc *CreditCard) GetIssueNumber() string            { return cc.IssueNumber }
+func (cc *CreditCard) SetIssueNumber(issueNumber string) { cc.IssueNumber = issueNumber }
 
 func (cc *CreditCard) RequiresVerificationValue() bool { return !cc.OptionalVerficationValue }
 func (cc *CreditCard) SetRequiresVerificationValue(required bool) {

@@ -2,6 +2,7 @@ package credit_card_utils
 
 import (
 	"fmt"
+	"regexp"
 	"time"
 )
 
@@ -55,6 +56,16 @@ func IsValidExpiryYear(year int) bool {
 	return year >= currentYear && year <= currentYear+20
 }
 
+func IsValidStartYear(year int) bool {
+	return year > 1987
+}
+
+func IsValidIssueNumber(number string) bool {
+	re := regexp.MustCompile(`^\d{1,2}$`)
+
+	return re.MatchString(number)
+}
+
 func CheckForRequiredFields(rcc ReadOnlyCreditCard) error {
 	err := new(FieldsError)
 
@@ -106,6 +117,26 @@ func ValidateCreditCard(cc CreditCard) error {
 
 	if !IsValidExpiryYear(cc.GetYear()) {
 		err.Add("Year", INVALID)
+	}
+
+	if cc.GetBrand() == "switch" || cc.GetBrand() == "solo" {
+		if !(IsValidMonth(cc.GetStartMonth()) && IsValidStartYear(cc.GetStartYear()) || IsValidIssueNumber(cc.GetIssueNumber())) {
+			if cc.GetIssueNumber() == "" {
+				err.Add("IssueNumber", REQUIRED)
+
+				if !IsValidMonth(cc.GetStartMonth()) {
+					err.Add("StartMonth", INVALID)
+				}
+
+				if !IsValidStartYear(cc.GetStartYear()) {
+					err.Add("StartYear", INVALID)
+				}
+			} else {
+				if !IsValidIssueNumber(cc.GetIssueNumber()) {
+					err.Add("IssueNumber", INVALID)
+				}
+			}
+		}
 	}
 
 	return err.ToError()

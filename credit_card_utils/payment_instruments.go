@@ -8,6 +8,9 @@ type ReadOnlyCreditCard interface {
 	GetVerificationValue() string
 	GetMonth() int
 	GetYear() int
+	GetStartMonth() int
+	GetStartYear() int
+	GetIssueNumber() string
 	RequiresVerificationValue() bool
 }
 
@@ -34,4 +37,13 @@ type CreditCard interface {
 
 	GetYear() int
 	SetYear(int)
+
+	GetStartMonth() int
+	SetStartMonth(int)
+
+	GetStartYear() int
+	SetStartYear(int)
+
+	GetIssueNumber() string
+	SetIssueNumber(string)
 }
