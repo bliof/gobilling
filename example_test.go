@@ -65,7 +65,4 @@ func ExampleGateway_interaction() {
 			fmt.Printf("Charged %.2f to the credit card %s", amount, creditCard.DisplayNumber())
 		}
 	}
-
-	// Output:
-	// Charged 20.00 to the credit card XXXX-XXXX-XXXX-2222
 }
