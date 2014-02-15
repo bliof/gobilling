@@ -45,7 +45,7 @@ func (pp *PayPal) Purchase(amount float64, cc CreditCard, ba gobilling.BillingAd
 	params.Add("METHOD", "DoDirectPayment")
 	params.Add("VERSION", pp.Version())
 	params.Add("PAYMENTACTION", "SALE")
-	params.Add("AMT", "5")
+	params.Add("AMT", fmt.Sprintf("%0.02f", amount))
 	params.Add("ACCT", cc.GetNumber())
 	params.Add("CREDITCARDTYPE", "VISA")
 	params.Add("CVV2", cc.GetVerificationValue())
