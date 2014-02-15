@@ -10,10 +10,14 @@ import (
 )
 
 func TestPayPalPurchase(t *testing.T) {
+	if testing.Short() {
+		t.Skip("Don't do requests to paypal in short mode.")
+	}
+
 	config, _ := yaml.ReadFile("test_config.yaml")
 
 	if config == nil {
-		return
+		t.Skip("No config found. Skipping tests.")
 	}
 
 	user, _ := config.Get("paypal.user")
@@ -21,7 +25,7 @@ func TestPayPalPurchase(t *testing.T) {
 	signature, _ := config.Get("paypal.signature")
 
 	if user == "" || password == "" || signature == "" {
-		return
+		t.Skip("No config found. Skipping tests.")
 	}
 
 	gateway := PayPal{
