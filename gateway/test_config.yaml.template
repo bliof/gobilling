@@ -1,0 +1,4 @@
+paypal:
+  user: USER
+  password: PASSWORD
+  signature: SIGNATURE

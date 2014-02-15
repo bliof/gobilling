@@ -55,7 +55,11 @@ func ExampleGateway_interaction() {
 	err := creditCard.Validate()
 
 	if err == nil {
-		response := gateway.Purchase(amount, creditCard)
+		response := gateway.Purchase(
+			amount,
+			&creditCard,
+			gobilling.BillingAddress{Street: "FirstStreet", City: "SanJose", State: "CA", Zip: "95131"},
+		)
 
 		if response.IsSuccessful() {
 			fmt.Printf("Charged %.2f to the credit card %s", amount, creditCard.DisplayNumber())

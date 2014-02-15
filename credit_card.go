@@ -54,3 +54,7 @@ func (cc *CreditCard) Validate() error {
 func (cc *CreditCard) DisplayNumber() string {
 	return ccutils.MaskNumber(cc.Number)
 }
+
+type BillingAddress struct {
+	Street, City, State, Zip string
+}
