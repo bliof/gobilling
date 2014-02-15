@@ -5,6 +5,8 @@ import ccutils "github.com/bliof/gobilling/credit_card_utils"
 type CreditCard struct {
 	FirstName, LastName, Number, Brand, VerificationValue string
 	Month, Year                                           int
+
+	OptionalVerficationValue bool
 }
 
 func (cc *CreditCard) GetFirstName() string     { return cc.FirstName }
@@ -27,6 +29,11 @@ func (cc *CreditCard) SetMonth(month int) { cc.Month = month }
 
 func (cc *CreditCard) GetYear() int     { return cc.Year }
 func (cc *CreditCard) SetYear(year int) { cc.Year = year }
+
+func (cc *CreditCard) RequiresVerificationValue() bool { return !cc.OptionalVerficationValue }
+func (cc *CreditCard) SetRequiresVerificationValue(required bool) {
+	cc.OptionalVerficationValue = !required
+}
 
 func (cc *CreditCard) Validate() error {
 	return ccutils.ValidateCreditCard(cc)

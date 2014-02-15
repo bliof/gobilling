@@ -66,12 +66,16 @@ func CheckForRequiredFields(rcc ReadOnlyCreditCard) error {
 		err.Add("LastName", REQUIRED)
 	}
 
+	if rcc.GetBrand() == "" {
+		err.Add("Brand", REQUIRED)
+	}
+
 	if rcc.GetNumber() == "" {
 		err.Add("Number", REQUIRED)
 	}
 
-	if rcc.GetBrand() == "" {
-		err.Add("Brand", REQUIRED)
+	if rcc.RequiresVerificationValue() && rcc.GetVerificationValue() == "" {
+		err.Add("VerificationValue", REQUIRED)
 	}
 
 	if rcc.GetMonth() == 0 {
