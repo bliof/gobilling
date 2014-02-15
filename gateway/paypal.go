@@ -4,6 +4,7 @@ import "github.com/bliof/gobilling"
 
 type PayPal struct {
 	User, Password, Signature string
+	Testing                   bool
 }
 
 func (pp *PayPal) Purchase(amount float64, creditCard gobilling.CreditCard) (response *Response) {

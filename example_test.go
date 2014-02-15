@@ -38,6 +38,7 @@ func ExampleGateway_interaction() {
 		User:      "TestMerchant",
 		Password:  "password",
 		Signature: "ashjdfasdkf",
+		Testing:   true,
 	}
 
 	amount := 20.0
